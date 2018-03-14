@@ -1,0 +1,1 @@
+Plan is to build a Rails application that matches the experience of a Fire Emblem match using a Rails back end and a Vue frontend
