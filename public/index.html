@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
   <title>Fire Emblem</title>
@@ -6,6 +6,7 @@
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
   <script src="index.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="app.css">
 </head>
 <body>
   Hello world
@@ -19,8 +20,48 @@
 
 <template id='home-page'>
   <div>
-    <div v-for="character in characters">
-      <h1>{{character.name}}</h1>
+    <div v-for="character in characters" class = "character-card">
+      <h1 v-on:click = "log">{{character.name}}</h1>
+      <ul>
+        <li>Lvl 1 {{character.class}}</li>
+        <li>{{character.hp}} hp</li>
+      </ul>
+      <button v-on:click = "attack">attack</button>
+    </div>
+    <button v-on:click="test">hello</button>
+  </div>
+</template> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="index.js" defer></script>
+  <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="home-page">
+  <div >
+    <h1>Characters</h1>
+    <div v-for="character in characters" class = "character-card">
+      <h2>{{character.name}}</h2>
+      <ul>
+        <li>Lvl 1 {{character.class}}</li>
+        <li>{{character.hp}} hp</li>
+      </ul>
+      <button v-on:click = "attack(character.id)">attack</button>
     </div>
   </div>
 </template>

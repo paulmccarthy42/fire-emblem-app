@@ -13,7 +13,15 @@ var HomePage = {
       this.characters = response.data;
     }.bind(this));
   },
-  methods: {},
+  methods: {
+    attack: function(id) {
+      this.characters.forEach(function(character) {
+        if (character.id !== id) {
+          character.hp -= 1;
+        }
+      });
+    }
+  },
   computed: {}
 };
 
