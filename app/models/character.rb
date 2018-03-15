@@ -6,7 +6,9 @@ class Character < ApplicationRecord
       id: id,
       name: name,
       class: character_class.name,
-      hp: hp
+      hp: hp,
+      loyalty: loyalty,
+      status: status
     }
   end
 end
