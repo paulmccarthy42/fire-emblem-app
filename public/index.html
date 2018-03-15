@@ -54,14 +54,33 @@
 
 <template id="home-page">
   <div >
-    <h1>Characters</h1>
-    <div v-for="character in characters" class = "character-card">
+    <h1 v-on:click="test">Characters</h1>
+    <div 
+      v-for="character in characters" 
+      class = "character-card"
+      v-bind:class = "[character.loyalty,character.status]"
+      >
       <h2>{{character.name}}</h2>
       <ul>
         <li>Lvl 1 {{character.class}}</li>
         <li>{{character.hp}} hp</li>
       </ul>
-      <button v-on:click = "attack(character.id)">attack</button>
+      <div class='action-suite'>
+        <div v-if="character.hp > 0">
+          <button v-on:click = "attack(character.loyalty)">
+            attack
+          </button>
+        </div>
+        <div v-else>
+          <button v-on:click = "revive(character.id)">
+            revive
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button>save</button>
+      <button>refresh</button>
     </div>
   </div>
 </template>

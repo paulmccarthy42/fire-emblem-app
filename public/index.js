@@ -14,12 +14,25 @@ var HomePage = {
     }.bind(this));
   },
   methods: {
-    attack: function(id) {
+    attack: function(loyalty) {
       this.characters.forEach(function(character) {
-        if (character.id !== id) {
-          character.hp -= 1;
+        if (character.loyalty !== loyalty) {
+          character.hp = Math.max(character.hp - 1,0);
+          if (character.hp === 0) {
+            character.status = 'dead';
+          }
         }
       });
+    },
+    test: function() {
+      console.log(this.characters);
+    },
+    revive: function(id) {
+      var index = this.characters.findIndex(function(char) {
+        return char.id === id;
+      });
+      this.characters[index].status = "normal";
+      this.characters[index].hp = 18;
     }
   },
   computed: {}

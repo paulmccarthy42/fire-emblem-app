@@ -4,3 +4,20 @@
   padding: 5px;
   margin: 10px;
 }
+
+
+.character-card.player {
+  background-color: lightblue;
+}
+
+.character-card.ally {
+  background-color: lightgreen;
+}
+
+.character-card.enemy {
+  background-color: pink;
+}
+
+.character-card.dead {
+  background-color: lightgrey;
+}
