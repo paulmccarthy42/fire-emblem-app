@@ -1,37 +1,3 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-  <title>Fire Emblem</title>
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.js"></script>
-  <script src="index.js" defer></script>
-  <link rel="stylesheet" type="text/css" href="app.css">
-</head>
-<body>
-  Hello world
-  <div id="vue-app">
-
-    <router-view></router-view>
-
-  </div>
-</body>
-</html>
-
-<template id='home-page'>
-  <div>
-    <div v-for="character in characters" class = "character-card">
-      <h1 v-on:click = "log">{{character.name}}</h1>
-      <ul>
-        <li>Lvl 1 {{character.class}}</li>
-        <li>{{character.hp}} hp</li>
-      </ul>
-      <button v-on:click = "attack">attack</button>
-    </div>
-    <button v-on:click="test">hello</button>
-  </div>
-</template> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,8 +45,8 @@
       </div>
     </div>
     <div>
-      <button>save</button>
-      <button>refresh</button>
+      <button v-on:click="save">save</button>
+      <button v-on:click='refresh'>refresh</button>
     </div>
   </div>
 </template>

@@ -31,8 +31,17 @@ var HomePage = {
       var index = this.characters.findIndex(function(char) {
         return char.id === id;
       });
-      this.characters[index].status = "normal";
-      this.characters[index].hp = 18;
+      var character = this.characters[index];
+      character.status = "normal";
+      character.hp = character.max_hp;
+    },
+    refresh: function() {
+      this.characters.forEach(function(char) {
+        this.revive(char.id);
+      }.bind(this));
+    },
+    save: function() {
+      axios.patch("/v1/characters", {characters: this.characters});
     }
   },
   computed: {}

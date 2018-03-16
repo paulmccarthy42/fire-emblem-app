@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315034156) do
+ActiveRecord::Schema.define(version: 20180316044633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20180315034156) do
     t.boolean "can_use_dark_magic"
     t.boolean "can_use_light_magic"
     t.boolean "can_use_staves"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "character_stats", force: :cascade do |t|
+    t.integer "character_id"
+    t.integer "max_hp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
