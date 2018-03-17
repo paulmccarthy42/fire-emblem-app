@@ -18,11 +18,11 @@ var HomePage = {
       var attackedIndex = this.characters.findIndex(function(char) {
         return char.id === attackedId;
       });
-      this.characters[attackedIndex].hp = Math.max(0, this.characters[attackedIndex].hp - 1);
+      this.characters[attackedIndex].hp = Math.max(0, this.characters[attackedIndex].hp - Math.floor((Math.random() * 10) + 1));
       if (this.characters[attackedIndex].hp === 0) {
-        this.characters[attackedIndex].status = "dead"
+        this.characters[attackedIndex].status = "dead";
       }
-      this.deactivate(attackingId)
+      this.deactivate(attackingId);
 
     },
     attackable: function(character) {
@@ -44,7 +44,7 @@ var HomePage = {
       var index = this.characters.findIndex(function(char) {
         return char.id === id;
       });
-      this.characters[index].active = false
+      this.characters[index].active = false;
     },
     refresh: function() {
       this.characters.forEach(function(char) {
@@ -53,6 +53,11 @@ var HomePage = {
     },
     save: function() {
       axios.patch("/v1/characters", {characters: this.characters});
+    },
+    endTurn: function() {
+      this.characters.forEach(function(char) {
+        char.active = true;
+      });
     }
   },
   computed: {}
