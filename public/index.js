@@ -18,7 +18,10 @@ var HomePage = {
       var index = this.characters.findIndex(function(char) {
         return char.id === id;
       });
-      this.characters[index].hp -= 1;
+      this.characters[index].hp = Math.max(0, this.characters[index].hp - 1);
+      if (this.characters[index].hp === 0) {
+        this.characters[index].status = "dead"
+      }
     },
     attackable: function(character) {
       return this.characters.filter(function(char) {
