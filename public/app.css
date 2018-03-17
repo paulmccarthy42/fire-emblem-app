@@ -37,3 +37,7 @@
   border: 1px black solid;
   float: left;
 }
+
+.map-square:hover {
+  background-color: green;
+}
