@@ -13,3 +13,4 @@ class V1::CharactersController < ApplicationController
     render json: Character.all.as_json
   end
 end
+

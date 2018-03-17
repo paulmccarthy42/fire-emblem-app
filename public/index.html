@@ -20,7 +20,7 @@
 
 <template id="home-page">
   <div >
-    <h1 v-on:click="test">Characters</h1>
+    <h1>Characters</h1>
     <div 
       v-for="character in characters" 
       class = "character-card"
@@ -32,11 +32,21 @@
         <li>{{character.hp}} hp</li>
       </ul>
       <div class='action-suite'>
+
         <div v-if="character.hp > 0">
-          <button v-on:click = "attack(character.loyalty)">
+          <button v-on:click = "attack(character.attacking_id)">
             attack
           </button>
+          <select v-model="character.attacking_id">
+            <option></option>
+            <option 
+              v-for="x in attackable(character)"
+              v-bind:value="x.id">
+              {{x.name}}
+            </option>
+          </select>
         </div>
+
         <div v-else>
           <button v-on:click = "revive(character.id)">
             revive

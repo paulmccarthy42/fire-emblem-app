@@ -14,18 +14,18 @@ var HomePage = {
     }.bind(this));
   },
   methods: {
-    attack: function(loyalty) {
-      this.characters.forEach(function(character) {
-        if (character.loyalty !== loyalty) {
-          character.hp = Math.max(character.hp - 1,0);
-          if (character.hp === 0) {
-            character.status = 'dead';
-          }
-        }
+    attack: function(id) {
+      var index = this.characters.findIndex(function(char) {
+        return char.id === id;
       });
+      this.characters[index].hp -= 1;
     },
-    test: function() {
-      console.log(this.characters);
+    attackable: function(character) {
+      return this.characters.filter(function(char) {
+        return char !== character &&
+          char.loyalty !== character.loyalty && 
+          char.status !== 'dead';
+      });
     },
     revive: function(id) {
       var index = this.characters.findIndex(function(char) {
@@ -58,3 +58,4 @@ var app = new Vue({
   el: "#vue-app",
   router: router
 });
+
