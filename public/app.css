@@ -21,3 +21,19 @@
 .character-card.dead {
   background-color: lightgrey;
 }
+
+.map {
+  margin-left: 40%;
+}
+
+.map-row {
+  float: none;
+}
+
+.map-square {
+  background-color: lightgreen;
+  width: 30px;
+  height: 30px;
+  border: 1px black solid;
+  float: left;
+}

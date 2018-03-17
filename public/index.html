@@ -19,48 +19,67 @@
 </html>
 
 <template id="home-page">
-  <div >
-    <h1>Characters</h1>
-    <div 
-      v-for="character in characters" 
-      class = "character-card"
-      v-bind:class = "[character.loyalty,character.status]"
-      >
-      <h2>{{character.name}}</h2>
-      <ul>
-        <li>Lvl 1 {{character.class}}</li>
-        <li>{{character.hp}}/{{character.max_hp}} hp</li>
-      </ul>
+  <div>
+    <div class="character-cards">
+      <h1>Characters</h1>
       <div 
-        class='action-suite' 
-        v-if="character.active"
+        v-for="character in characters" 
+        class = "character-card"
+        v-bind:class = "[character.loyalty,character.status]"
         >
-
-        <div v-if="character.hp > 0">
-          <button v-on:click = "attack(character.id, character.attacking_id)">
-            attack
-          </button>
-          <select v-model="character.attacking_id">
-            <option></option>
-            <option 
-              v-for="x in attackable(character)"
-              v-bind:value="x.id">
-              {{x.name}}
-            </option>
-          </select>
-        </div>
-
-        <div v-else>
-          <button v-on:click = "revive(character.id)">
-            revive
-          </button>
+        <h2>{{character.name}}</h2>
+        <ul>
+          <li>Lvl 1 {{character.class}}</li>
+          <li>{{character.hp}}/{{character.max_hp}} hp</li>
+        </ul>
+        <div 
+          class='action-suite' 
+          v-if="character.active"
+          >
+          <div v-if="character.hp > 0">
+            <button v-on:click = "attack(character.id, character.attacking_id)">
+              attack
+            </button>
+            <select v-model="character.attacking_id">
+              <option></option>
+              <option 
+                v-for="x in attackable(character)"
+                v-bind:value="x.id">
+                {{x.name}}
+              </option>
+            </select>
+          </div>
+          <div v-else>
+            <button v-on:click = "revive(character.id)">
+              revive
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <div>
+
+    <div class="menu">
       <button v-on:click="save">save</button>
       <button v-on:click='refresh'>refresh</button>
       <button v-on:click='endTurn'>end turn</button>
     </div>
+
+    <table class="map">
+      <tr class="map-row">
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+      </tr>
+      <tr class="map-row">
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+        <td class="map-square"></td>
+      </tr>
+    </table>
+    
   </div>
 </template>

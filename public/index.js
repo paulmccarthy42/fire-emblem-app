@@ -50,6 +50,7 @@ var HomePage = {
       this.characters.forEach(function(char) {
         this.revive(char.id);
       }.bind(this));
+      this.endTurn();
     },
     save: function() {
       axios.patch("/v1/characters", {characters: this.characters});
