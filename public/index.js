@@ -14,14 +14,16 @@ var HomePage = {
     }.bind(this));
   },
   methods: {
-    attack: function(id) {
-      var index = this.characters.findIndex(function(char) {
-        return char.id === id;
+    attack: function(attackingId, attackedId) {
+      var attackedIndex = this.characters.findIndex(function(char) {
+        return char.id === attackedId;
       });
-      this.characters[index].hp = Math.max(0, this.characters[index].hp - 1);
-      if (this.characters[index].hp === 0) {
-        this.characters[index].status = "dead"
+      this.characters[attackedIndex].hp = Math.max(0, this.characters[attackedIndex].hp - 1);
+      if (this.characters[attackedIndex].hp === 0) {
+        this.characters[attackedIndex].status = "dead"
       }
+      this.deactivate(attackingId)
+
     },
     attackable: function(character) {
       return this.characters.filter(function(char) {
@@ -37,6 +39,12 @@ var HomePage = {
       var character = this.characters[index];
       character.status = "normal";
       character.hp = character.max_hp;
+    },
+    deactivate: function(id) {
+      var index = this.characters.findIndex(function(char) {
+        return char.id === id;
+      });
+      this.characters[index].active = false
     },
     refresh: function() {
       this.characters.forEach(function(char) {

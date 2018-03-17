@@ -29,12 +29,15 @@
       <h2>{{character.name}}</h2>
       <ul>
         <li>Lvl 1 {{character.class}}</li>
-        <li>{{character.hp}} hp</li>
+        <li>{{character.hp}}/{{character.max_hp}} hp</li>
       </ul>
-      <div class='action-suite'>
+      <div 
+        class='action-suite' 
+        v-if="character.active"
+        >
 
         <div v-if="character.hp > 0">
-          <button v-on:click = "attack(character.attacking_id)">
+          <button v-on:click = "attack(character.id, character.attacking_id)">
             attack
           </button>
           <select v-model="character.attacking_id">

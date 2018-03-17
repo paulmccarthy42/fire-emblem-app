@@ -10,7 +10,8 @@ class Character < ApplicationRecord
       hp: hp,
       max_hp: character_stat.max_hp,
       loyalty: loyalty,
-      status: status
+      status: status,
+      active: true
     }
   end
 end
