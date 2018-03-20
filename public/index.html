@@ -65,8 +65,8 @@
     </div>
 
     <table class="map">
-      <tr class="map-row" v-for="value,key in map">
-        <td class="map-square" v-for="y in value" v-bind:class="key+'-'+y"></td>
+      <tr class="map-row" v-for="rowValue,rowKey in map">
+        <td class="map-square" v-for="columnValue, columnKey in rowValue" v-bind:class="rowKey+'-'+columnKey"></td>
       </tr>
     </table>
     

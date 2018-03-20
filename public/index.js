@@ -6,23 +6,15 @@ var HomePage = {
     return {
       message: "Welcome to Vue.js!",
       characters: [],
-      map: {
-        1 : [1,2,3,4,5,6,7,8,9,10],
-        2 : [1,2,3,4,5,6,7,8,9,10],
-        3 : [1,2,3,4,5,6,7,8,9,10],
-        4 : [1,2,3,4,5,6,7,8,9,10],
-        5 : [1,2,3,4,5,6,7,8,9,10],
-        6 : [1,2,3,4,5,6,7,8,9,10],
-        7 : [1,2,3,4,5,6,7,8,9,10],
-        8 : [1,2,3,4,5,6,7,8,9,10],
-        9 : [1,2,3,4,5,6,7,8,9,10],
-        10 : [1,2,3,4,5,6,7,8,9,10],
-      }
+      map: {}
     };
   },
   created: function() {
     axios.get("/v1/characters").then(function(response) {
       this.characters = response.data;
+    }.bind(this));
+    axios.get("/v1/map").then(function(response) {
+      this.map = response.data;
     }.bind(this));
   },
   methods: {
