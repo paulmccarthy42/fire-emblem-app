@@ -5,7 +5,14 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      characters: []
+      characters: [],
+      map: {
+        1 : [1,2,3,4,5],
+        2 : [1,2,3,4,5],
+        3 : [1,2,3,4,5],
+        4 : [1,2,3,4,5],
+        5 : [1,2,3,4,5]
+      }
     };
   },
   created: function() {
