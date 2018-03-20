@@ -4,7 +4,7 @@ class V1::TerrainTypesController < ApplicationController
     10.times do |x|
       map[x] = {}
       10.times do |y|
-        map[x][y] = TerrainType.find_by(id: rand(2)+1)
+        map[x][y] = TerrainType.find_by(id: rand(3)+1)
       end
     end
     render json: map

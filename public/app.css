@@ -32,13 +32,32 @@
 }
 
 .map-square {
-  background-color: lightgreen;
   width: 30px;
   height: 30px;
   border: 1px black solid;
   float: left;
 }
 
-.map-square:hover {
+.map-square.plains {
+  background-color: lightgreen;
+}
+
+.map-square.forest {
   background-color: green;
+}
+
+.map-square.water {
+  background-color: lightblue;
+}
+
+.map-square.plains:hover {
+  background-color: green;
+}
+
+.map-square.forest:hover {
+  background-color: darkgreen;
+}
+
+.map-square.water:hover {
+  background-color: blue;
 }
