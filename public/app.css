@@ -39,6 +39,10 @@
   opacity: 50%
 }
 
+.map-square > * {
+  align-content: center;
+}
+
 .map-square.plains {
   background-color: lightgreen;
 }
