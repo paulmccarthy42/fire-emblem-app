@@ -81,7 +81,10 @@ var HomePage = {
       });
     },
     focus: function(row, column) {
-      $("#" + this.focused.x + "-" + this.focused.y).removeClass("focused");
+      $(".map-square").each(function() {
+        $(this).removeClass("in-range");
+        $(this).removeClass("focused");
+      });
       this.focused.x = row;
       this.focused.y = column;
       if (row) {
