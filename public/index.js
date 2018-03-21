@@ -7,37 +7,47 @@ var HomePage = {
       message: "Welcome to Vue.js!",
       characters: [],
       map: {},
-      focused: {x: null, y: null}
+      focused: { x: null, y: null }
     };
   },
   created: function() {
-    axios.get("/v1/map").then(function(response) {
-      this.map = response.data;
-      axios.get("/v1/characters").then(function(response) {
-        this.characters = response.data;
-        this.characters.forEach(function(char) {
-          $("#" + char.x_position + "-" + char.y_position).append("<img src='hero.png'>");
-        });
-      }.bind(this));
-    }.bind(this));
+    axios.get("/v1/map").then(
+      function(response) {
+        this.map = response.data;
+        axios.get("/v1/characters").then(
+          function(response) {
+            this.characters = response.data;
+            this.characters.forEach(function(char) {
+              $("#" + char.x_position + "-" + char.y_position).append(
+                "<img src='hero.png'>"
+              );
+            });
+          }.bind(this)
+        );
+      }.bind(this)
+    );
   },
   methods: {
     attack: function(attackingId, attackedId) {
       var attackedIndex = this.characters.findIndex(function(char) {
         return char.id === attackedId;
       });
-      this.characters[attackedIndex].hp = Math.max(0, this.characters[attackedIndex].hp - Math.floor((Math.random() * 10) + 1));
+      this.characters[attackedIndex].hp = Math.max(
+        0,
+        this.characters[attackedIndex].hp - Math.floor(Math.random() * 10 + 1)
+      );
       if (this.characters[attackedIndex].hp === 0) {
         this.characters[attackedIndex].status = "dead";
       }
       this.deactivate(attackingId);
-
     },
     attackable: function(character) {
       return this.characters.filter(function(char) {
-        return char !== character &&
-          char.loyalty !== character.loyalty && 
-          char.status !== 'dead';
+        return (
+          char !== character &&
+          char.loyalty !== character.loyalty &&
+          char.status !== "dead"
+        );
       });
     },
     revive: function(id) {
@@ -55,13 +65,15 @@ var HomePage = {
       this.characters[index].active = false;
     },
     refresh: function() {
-      this.characters.forEach(function(char) {
-        this.revive(char.id);
-      }.bind(this));
+      this.characters.forEach(
+        function(char) {
+          this.revive(char.id);
+        }.bind(this)
+      );
       this.endTurn();
     },
     save: function() {
-      axios.patch("/v1/characters", {characters: this.characters});
+      axios.patch("/v1/characters", { characters: this.characters });
     },
     endTurn: function() {
       this.characters.forEach(function(char) {
@@ -72,7 +84,21 @@ var HomePage = {
       $("#" + this.focused.x + "-" + this.focused.y).removeClass("focused");
       this.focused.x = row;
       this.focused.y = column;
+      if (row) {
+        this.showInRange(row, column, 3);
+      }
       $("#" + row + "-" + column).addClass("focused");
+    },
+    showInRange: function(row, column, range) {
+      for (var x = -range; x <= range; x++) {
+        for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
+          if (x !== 0 || y !== 0) {
+            $(
+              "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
+            ).addClass("in-range");
+          }
+        }
+      }
     }
   },
   computed: {}
@@ -89,4 +115,3 @@ var app = new Vue({
   el: "#vue-app",
   router: router
 });
-
