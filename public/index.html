@@ -72,7 +72,7 @@
           v-bind:class="'map-square '+ columnValue.name"
           v-bind:id="rowKey+'-'+columnKey"
           v-for="columnValue, columnKey in rowValue" 
-          v-on:click="focus(rowKey, columnKey, this)"
+          v-on:click="clickOnTile(rowKey, columnKey)"
           >
             
           </td>

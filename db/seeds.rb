@@ -6,3 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+names = ['plains', 'forest', 'water']
+
+3.times do |x|
+  t = TerrainType.new
+  t.name = names[x]
+  t.water_tile = names[x] == 'water'
+  t.movement_multiplier = 1
+  t.movement_multiplier *= 2 if names[x] == 'forest'
+  t.save
+end
