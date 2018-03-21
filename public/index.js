@@ -81,17 +81,21 @@ var HomePage = {
       });
     },
     clickOnTile: function(row, column) {
-      $(".map-square").each(function() {
-        $(this).removeClass("in-range");
-        $(this).removeClass("focused");
-        $(this).removeClass("attackable");
-      });
       var cell = $("#" + row + "-" + column);
-      cell.addClass("focused");
-      this.focused.x = row;
-      this.focused.y = column;
-      if (cell.html() !== "") {
-        this.focus(row, column, 3);
+      if (cell.hasClass("in-range")) {
+        console.log("woo");
+      } else {
+        $(".map-square").each(function() {
+          $(this).removeClass("in-range");
+          $(this).removeClass("focused");
+          $(this).removeClass("attackable");
+        });
+        cell.addClass("focused");
+        this.focused.x = row;
+        this.focused.y = column;
+        if (cell.html() !== "") {
+          this.focus(row, column, 3);
+        }
       }
     },
     focus: function(row, column, range) {
