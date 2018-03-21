@@ -11,7 +11,9 @@ class Character < ApplicationRecord
       max_hp: character_stat.max_hp,
       loyalty: loyalty,
       status: status,
-      active: true
+      active: true,
+      x_position: rand(20),
+      y_position: rand(20)
     }
   end
 end

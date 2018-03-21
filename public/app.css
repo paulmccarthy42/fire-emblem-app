@@ -50,14 +50,18 @@
   background-color: lightblue;
 }
 
-.map-square.plains:hover {
+.map-square.plains:not(.focused):hover {
   background-color: green;
 }
 
-.map-square.forest:hover {
+.map-square.forest:not(.focused):hover {
   background-color: darkgreen;
 }
 
-.map-square.water:hover {
+.map-square.water:not(.focused):hover {
   background-color: blue;
+}
+
+.map-square.focused {
+  background-color: purple
 }

@@ -1,9 +1,9 @@
 class V1::TerrainTypesController < ApplicationController
   def generate_map
     map = {}
-    10.times do |x|
+    20.times do |x|
       map[x] = {}
-      10.times do |y|
+      20.times do |y|
         map[x][y] = TerrainType.find_by(id: rand(3)+1)
       end
     end

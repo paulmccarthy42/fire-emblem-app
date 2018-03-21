@@ -1,4 +1,4 @@
-/* global Vue, VueRouter, axios */
+/* global Vue, VueRouter, axios, $ */
 
 var HomePage = {
   template: "#home-page",
@@ -6,7 +6,8 @@ var HomePage = {
     return {
       message: "Welcome to Vue.js!",
       characters: [],
-      map: {}
+      map: {},
+      focused: {x: null, y: null}
     };
   },
   created: function() {
@@ -63,6 +64,12 @@ var HomePage = {
       this.characters.forEach(function(char) {
         char.active = true;
       });
+    },
+    focus: function(row, column) {
+      $("#" + row + "-" + column).removeClass("focused");
+      this.focused.x = row;
+      this.focused.y = column;
+      $("#" + row + "-" + column).addClass("focused");
     }
   },
   computed: {}

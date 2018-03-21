@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>My App</title>
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.js"></script>
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.js"></script>
@@ -31,6 +32,7 @@
         <ul>
           <li>Lvl 1 {{character.class}}</li>
           <li>{{character.hp}}/{{character.max_hp}} hp</li>
+          <li>{{character.x_position}}-{{character.y_position}}</li>
         </ul>
         <div 
           class='action-suite' 
@@ -67,8 +69,10 @@
     <table class="map">
       <tr class="map-row" v-for="rowValue,rowKey in map">
         <td 
-          v-bind:class="'map-square '+ columnValue.name + ' ' + rowKey+'-'+columnKey"
+          v-bind:class="'map-square '+ columnValue.name"
+          v-bind:id="rowKey+'-'+columnKey"
           v-for="columnValue, columnKey in rowValue" 
+          v-on:click="focus(rowKey, columnKey, this)"
           >
             
           </td>
