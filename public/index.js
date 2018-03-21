@@ -80,7 +80,7 @@ var HomePage = {
         char.active = true;
       });
     },
-    focus: function(row, column) {
+    clickOnTile: function(row, column) {
       $(".map-square").each(function() {
         $(this).removeClass("in-range");
         $(this).removeClass("focused");
@@ -89,11 +89,10 @@ var HomePage = {
       this.focused.x = row;
       this.focused.y = column;
       if (row) {
-        this.showInRange(row, column, 3);
+        this.focus(row, column, 3);
       }
-      // $("#" + row + "-" + column).addClass("focused");
     },
-    showInRange: function(row, column, range) {
+    focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
           if (x === 0 && y === 0) {
