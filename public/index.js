@@ -66,7 +66,7 @@ var HomePage = {
       });
     },
     focus: function(row, column) {
-      $("#" + row + "-" + column).removeClass("focused");
+      $("#" + this.focused.x + "-" + this.focused.y).removeClass("focused");
       this.focused.x = row;
       this.focused.y = column;
       $("#" + row + "-" + column).addClass("focused");
