@@ -11,11 +11,14 @@ var HomePage = {
     };
   },
   created: function() {
-    axios.get("/v1/characters").then(function(response) {
-      this.characters = response.data;
-    }.bind(this));
     axios.get("/v1/map").then(function(response) {
       this.map = response.data;
+      axios.get("/v1/characters").then(function(response) {
+        this.characters = response.data;
+        this.characters.forEach(function(char) {
+          $("#" + char.x_position + "-" + char.y_position).addClass("occupied")
+        });
+      }.bind(this));
     }.bind(this));
   },
   methods: {
