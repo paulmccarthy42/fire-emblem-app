@@ -71,5 +71,9 @@
 }
 
 .map-square.in-range {
-  background-color: yellow;
+  background-color: pink;
+}
+
+.map-square.attackable {
+  background-color: red;
 }

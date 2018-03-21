@@ -84,18 +84,25 @@ var HomePage = {
       $(".map-square").each(function() {
         $(this).removeClass("in-range");
         $(this).removeClass("focused");
+        $(this).removeClass("attackable");
       });
       this.focused.x = row;
       this.focused.y = column;
       if (row) {
         this.showInRange(row, column, 3);
       }
-      $("#" + row + "-" + column).addClass("focused");
+      // $("#" + row + "-" + column).addClass("focused");
     },
     showInRange: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
-          if (x !== 0 || y !== 0) {
+          if (x === 0 && y === 0) {
+            $("#" + row + "-" + column).addClass("focused");
+          } else if (Math.abs(x) + Math.abs(y) === range) {
+            $(
+              "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
+            ).addClass("attackable");
+          } else {
             $(
               "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
             ).addClass("in-range");
