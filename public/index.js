@@ -101,13 +101,11 @@ var HomePage = {
     focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
-          if (x === 0 && y === 0) {
-            // $("#" + row + "-" + column).addClass("focused");
-          } else if (Math.abs(x) + Math.abs(y) === range) {
+          if (Math.abs(x) + Math.abs(y) === range) {
             $(
               "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
             ).addClass("attackable");
-          } else {
+          } else if (x !== 0 || y !== 0) {
             $(
               "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
             ).addClass("in-range");
