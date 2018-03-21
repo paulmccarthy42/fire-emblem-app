@@ -16,7 +16,7 @@ var HomePage = {
       axios.get("/v1/characters").then(function(response) {
         this.characters = response.data;
         this.characters.forEach(function(char) {
-          $("#" + char.x_position + "-" + char.y_position).addClass("occupied")
+          $("#" + char.x_position + "-" + char.y_position).append("<img src='hero.png'>");
         });
       }.bind(this));
     }.bind(this));
