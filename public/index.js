@@ -86,9 +86,11 @@ var HomePage = {
         $(this).removeClass("focused");
         $(this).removeClass("attackable");
       });
+      var cell = $("#" + row + "-" + column);
+      cell.addClass("focused");
       this.focused.x = row;
       this.focused.y = column;
-      if (row) {
+      if (cell.html() !== "") {
         this.focus(row, column, 3);
       }
     },
@@ -96,7 +98,7 @@ var HomePage = {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
           if (x === 0 && y === 0) {
-            $("#" + row + "-" + column).addClass("focused");
+            // $("#" + row + "-" + column).addClass("focused");
           } else if (Math.abs(x) + Math.abs(y) === range) {
             $(
               "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
