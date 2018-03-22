@@ -80,10 +80,27 @@ var HomePage = {
         char.active = true;
       });
     },
+    frontendTile: function(row, column) {
+      return $("#" + row + "-" + column);
+    },
+    backendTile: function(rowCoor, columnCoor) {
+      var tile = {};
+      this.map.forEach(function(row) {
+        row.forEach(function(thing) {
+          if (
+            thing.x_coordinate === rowCoor &&
+            thing.y_coordinate === columnCoor
+          ) {
+            tile = thing;
+          }
+        });
+      });
+      return tile;
+    },
     clickOnTile: function(row, column) {
-      var cell = $("#" + row + "-" + column);
+      var cell = this.frontendTile(row, column);
       if (cell.hasClass("in-range")) {
-        console.log(row, column);
+        console.log(this.backendTile(row, column));
       } else {
         $(".map-square").each(function() {
           $(this).removeClass("in-range");
