@@ -69,12 +69,11 @@
     <table class="map">
       <tr class="map-row" v-for="rowValue,rowKey in map">
         <td 
-          v-bind:class="'map-square '+ columnValue.name"
+          v-bind:class="'map-square '+ columnValue.terrain"
           v-bind:id="rowKey+'-'+columnKey"
           v-for="columnValue, columnKey in rowValue" 
           v-on:click="clickOnTile(rowKey, columnKey)"
           >
-            
           </td>
       </tr>
     </table>

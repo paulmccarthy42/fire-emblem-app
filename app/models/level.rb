@@ -7,13 +7,12 @@ class Level < ApplicationRecord
       map[tile.x_coordinate] = [] if not map[tile.x_coordinate]
       map[tile.x_coordinate][tile.y_coordinate] = tile
     end
-    p map.length
     map
   end
 
   def as_json
     {
-      map: map_layout,
+      map: map_layout.as_json,
       level: name,
       number: number
     }
