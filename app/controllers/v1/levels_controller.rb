@@ -1,5 +1,5 @@
-class V1::LevelController < ApplicationController
-    def generate_map
+class V1::LevelsController < ApplicationController
+  def generate_map
     map = {}
     20.times do |x|
       map[x] = {}
