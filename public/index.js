@@ -17,11 +17,6 @@ var HomePage = {
         axios.get("/v1/characters").then(
           function(response) {
             this.characters = response.data;
-            this.characters.forEach(function(char) {
-              $("#" + char.x_position + "-" + char.y_position).append(
-                "<img src='hero.png'>"
-              );
-            });
           }.bind(this)
         );
       }.bind(this)
@@ -98,8 +93,7 @@ var HomePage = {
       return tile;
     },
     clickOnTile: function(row, column) {
-      var cell = this.frontendTile(row, column);
-      if (cell.hasClass("in-range")) {
+      if (this.frontendTile(row, column).hasClass("in-range")) {
         console.log(this.backendTile(row, column));
       } else {
         $(".map-square").each(function() {
@@ -107,10 +101,9 @@ var HomePage = {
           $(this).removeClass("focused");
           $(this).removeClass("attackable");
         });
-        cell.addClass("focused");
-        this.focused.x = row;
-        this.focused.y = column;
-        if (cell.html() !== "") {
+        this.frontendTile(row, column).addClass("focused");
+        console.log(this.backendTile(row, column));
+        if (this.backendTile(row, column).character !== null) {
           this.focus(row, column, 3);
         }
       }

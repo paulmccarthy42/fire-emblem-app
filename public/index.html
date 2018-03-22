@@ -74,6 +74,7 @@
           v-for="tile in row" 
           v-on:click="clickOnTile(tile.x_coordinate, tile.y_coordinate)"
           >
+          <img v-if="tile.character" src='hero.png'>
           </td>
       </tr>
     </table>
