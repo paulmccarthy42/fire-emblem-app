@@ -4,8 +4,7 @@ class TerrainType < ApplicationRecord
       id: id,
       name: name,
       movement_multiplier: movement_multiplier,
-      water_tile: water_tile,
-      occupants: []
+      water_tile: water_tile
       }
   end
 end
