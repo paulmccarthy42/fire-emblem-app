@@ -103,8 +103,9 @@ var HomePage = {
         });
         this.frontendTile(row, column).addClass("focused");
         console.log(this.backendTile(row, column));
-        if (this.backendTile(row, column).character !== null) {
-          this.focus(row, column, 3);
+        var character = this.backendTile(row, column).character;
+        if (character !== null) {
+          this.focus(row, column, character.movement + 1);
         }
       }
     },
