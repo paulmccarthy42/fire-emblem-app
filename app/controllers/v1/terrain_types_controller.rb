@@ -7,6 +7,6 @@ class V1::TerrainTypesController < ApplicationController
         map[x][y] = TerrainType.find_by(id: rand(3)+1)
       end
     end
-    render json: map
+    render json: map.as_json
   end
 end

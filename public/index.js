@@ -83,7 +83,7 @@ var HomePage = {
     clickOnTile: function(row, column) {
       var cell = $("#" + row + "-" + column);
       if (cell.hasClass("in-range")) {
-        console.log("woo");
+        console.log(row, column);
       } else {
         $(".map-square").each(function() {
           $(this).removeClass("in-range");
