@@ -12,9 +12,7 @@ class Character < ApplicationRecord
       loyalty: loyalty,
       status: status,
       active: true,
-      movement: character_class.movement,
-      x_position: rand(20),
-      y_position: rand(20)
+      movement: character_class.movement
     }
   end
 end
