@@ -11,9 +11,9 @@ var HomePage = {
     };
   },
   created: function() {
-    axios.get("/v1/map").then(
+    axios.get("/v1/map/1").then(
       function(response) {
-        this.map = response.data;
+        this.map = response.data.map;
         axios.get("/v1/characters").then(
           function(response) {
             this.characters = response.data;

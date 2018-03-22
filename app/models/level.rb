@@ -7,6 +7,7 @@ class Level < ApplicationRecord
       map[tile.x_coordinate] = [] if not map[tile.x_coordinate]
       map[tile.x_coordinate][tile.y_coordinate] = tile
     end
+    p map.length
     map
   end
 
