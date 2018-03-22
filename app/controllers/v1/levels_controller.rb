@@ -9,4 +9,9 @@ class V1::LevelsController < ApplicationController
     end
     render json: map.as_json
   end
+
+  def find_map
+    id = params[:id]
+    render json: Level.find_by(id: id).as_json
+  end
 end

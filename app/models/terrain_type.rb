@@ -1,4 +1,6 @@
 class TerrainType < ApplicationRecord
+  has_many :tiles
+  
   def as_json
     {
       id: id,
