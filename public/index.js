@@ -7,7 +7,8 @@ var HomePage = {
       message: "Welcome to Vue.js!",
       characters: [],
       map: {},
-      focused: { x: null, y: null }
+      focused: { x: null, y: null },
+      character: {}
     };
   },
   created: function() {
@@ -94,7 +95,7 @@ var HomePage = {
     },
     clickOnTile: function(row, column) {
       if (this.frontendTile(row, column).hasClass("in-range")) {
-        console.log(this.backendTile(row, column));
+        this.move(row, column);
       } else {
         $(".map-square").each(function() {
           $(this).removeClass("in-range");
@@ -105,9 +106,16 @@ var HomePage = {
         console.log(this.backendTile(row, column));
         var character = this.backendTile(row, column).character;
         if (character !== null) {
+          this.character = character;
+          this.focused.x = row;
+          this.focused.y = column;
           this.focus(row, column, character.movement + 1);
         }
       }
+    },
+    move: function(row, column) {
+      this.backendTile(row, column).character = this.character;
+      this.backendTile(this.focused.x, this.focused.y).character = {};
     },
     focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
