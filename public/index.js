@@ -7,7 +7,8 @@ var HomePage = {
       message: "Welcome to Vue.js!",
       characters: [],
       map: {},
-      focused: { x: null, y: null }
+      focused: { x: null, y: null },
+      character: {}
     };
   },
   created: function() {
@@ -102,10 +103,9 @@ var HomePage = {
           $(this).removeClass("attackable");
         });
         this.frontendTile(row, column).addClass("focused");
-        console.log(this.backendTile(row, column));
-        var character = this.backendTile(row, column).character;
-        if (character !== null) {
-          this.focus(row, column, character.movement + 1);
+        this.character = this.backendTile(row, column).character;
+        if (this.character !== null) {
+          this.focus(row, column, this.character.movement + 1);
         }
       }
     },
