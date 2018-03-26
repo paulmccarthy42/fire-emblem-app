@@ -93,15 +93,19 @@ var HomePage = {
       });
       return tile;
     },
+    clearFocus: function() {
+      $(".map-square").each(function() {
+        $(this).removeClass("in-range");
+        $(this).removeClass("focused");
+        $(this).removeClass("attackable");
+      });
+      this.focused = { x: null, y: null };
+    },
     clickOnTile: function(row, column) {
       if (this.frontendTile(row, column).hasClass("in-range")) {
         this.move(row, column);
       } else {
-        $(".map-square").each(function() {
-          $(this).removeClass("in-range");
-          $(this).removeClass("focused");
-          $(this).removeClass("attackable");
-        });
+        this.clearFocus();
         this.frontendTile(row, column).addClass("focused");
         var character = this.backendTile(row, column).character;
         if (character !== null) {
@@ -115,6 +119,7 @@ var HomePage = {
     move: function(row, column) {
       this.backendTile(row, column).character = this.character;
       this.backendTile(this.focused.x, this.focused.y).character = {};
+      this.clearFocus();
     },
     focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
