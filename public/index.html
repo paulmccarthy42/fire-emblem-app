@@ -24,6 +24,7 @@
     <div class="character-cards">
       <h1>Characters</h1>
       <div 
+        v-if = "character.name"
         class = "character-card"
         v-bind:class = "[character.loyalty,character.status]"
         >
