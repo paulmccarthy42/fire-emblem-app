@@ -109,6 +109,8 @@ var HomePage = {
         this.clearFocus();
         this.frontendTile(row, column).addClass("focused");
         var character = this.backendTile(row, column).character;
+        // the issue with attacking is that front end relies on this, which doesn't update until the backend does
+        // this should replace this.characters
         if (character !== null) {
           this.character = character;
           this.focused.x = row;
