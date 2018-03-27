@@ -100,6 +100,7 @@ var HomePage = {
         $(this).removeClass("attackable");
       });
       this.focused = { x: null, y: null };
+      this.character = {};
     },
     clickOnTile: function(row, column) {
       if (this.frontendTile(row, column).hasClass("in-range")) {
