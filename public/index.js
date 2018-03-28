@@ -136,14 +136,21 @@ var HomePage = {
     focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
-          if (Math.abs(x) + Math.abs(y) === range) {
-            this.frontendTile(parseInt(row) + x, parseInt(column) + y).addClass(
-              "attackable"
-            );
+          var focusingTile = this.frontendTile(
+            parseInt(row) + x,
+            parseInt(column) + y
+          );
+          var focusedBackendTile = this.backendTile(
+            parseInt(row) + x,
+            parseInt(column) + y
+          );
+          if (
+            Math.abs(x) + Math.abs(y) === range ||
+            focusedBackendTile.character
+          ) {
+            focusingTile.addClass("attackable");
           } else if (x !== 0 || y !== 0) {
-            this.frontendTile(parseInt(row) + x, parseInt(column) + y).addClass(
-              "in-range"
-            );
+            focusingTile.addClass("in-range");
           }
         }
       }
