@@ -65,10 +65,7 @@ var HomePage = {
       character.hp = character.max_hp;
     },
     deactivate: function(id) {
-      var index = this.characters.findIndex(function(char) {
-        return char.id === id;
-      });
-      this.characters[index].active = false;
+      this.character.active = false;
     },
     refresh: function() {
       this.characters.forEach(
