@@ -5,7 +5,6 @@ var HomePage = {
   data: function() {
     return {
       message: "Welcome to Vue.js!",
-      characters: [],
       map: {},
       focused: { x: null, y: null },
       character: {}
@@ -15,30 +14,41 @@ var HomePage = {
     axios.get("/v1/map/1").then(
       function(response) {
         this.map = response.data.map;
-        axios.get("/v1/characters").then(
-          function(response) {
-            this.characters = response.data;
-          }.bind(this)
-        );
       }.bind(this)
     );
   },
   methods: {
-    attack: function(attackingId, attackedId) {
-      var attackedIndex = this.characters.findIndex(function(char) {
-        return char.id === attackedId;
+    charactersMapped: function() {
+      var char = [];
+      this.map.forEach(function(row) {
+        row.forEach(function(tile) {
+          if (tile.character) {
+            char.push(tile.character);
+          }
+        });
       });
-      this.characters[attackedIndex].hp = Math.max(
-        0,
-        this.characters[attackedIndex].hp - Math.floor(Math.random() * 10 + 1)
-      );
-      if (this.characters[attackedIndex].hp === 0) {
-        this.characters[attackedIndex].status = "dead";
-      }
+      return char;
+    },
+    attack: function(attackingId, attackedId) {
+      // update hp for this.map character
+      this.map.forEach(function(row) {
+        row.forEach(function(tile) {
+          if (tile.character && tile.character.id === attackedId) {
+            tile.character.hp = Math.max(
+              0,
+              tile.character.hp - Math.floor(Math.random() * 10 + 1)
+            );
+            if (tile.character.hp === 0) {
+              tile.character.status = "dead";
+            }
+          }
+        });
+      });
+      // cleanup for attacker
       this.deactivate(attackingId);
     },
     attackable: function(character) {
-      return this.characters.filter(function(char) {
+      return this.charactersMapped().filter(function(char) {
         return (
           char !== character &&
           char.loyalty !== character.loyalty &&
