@@ -71,7 +71,7 @@ var HomePage = {
       axios.patch("/v1/characters", { characters: this.charactersMapped() });
     },
     endTurn: function() {
-      this.characters.forEach(function(char) {
+      this.charactersMapped().forEach(function(char) {
         char.active = true;
       });
     },
