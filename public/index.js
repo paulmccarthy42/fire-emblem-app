@@ -120,11 +120,13 @@ var HomePage = {
         this.clearFocus();
         this.frontendTile(row, column).addClass("focused");
         var character = this.backendTile(row, column).character;
-        if (character && character.active) {
+        if (character) {
           this.character = character;
           this.focused.x = row;
           this.focused.y = column;
-          this.focus(row, column, character.movement + 1);
+          if (character.active) {
+            this.focus(row, column, character.movement + 1);
+          }
         }
       }
     },

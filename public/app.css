@@ -5,6 +5,13 @@
   margin: 10px;
 }
 
+.action-suite {
+  border: 1px solid black;
+  float: left;
+  padding: 5px;
+  margin: 10px;
+}
+
 .character-card.player {
   background-color: lightblue;
 }

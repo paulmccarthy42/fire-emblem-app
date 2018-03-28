@@ -21,10 +21,8 @@
 
 <template id="home-page">
   <div>
-    <div class="character-cards">
-      <h1>Characters</h1>
-      <div 
-        v-if = "character.name"
+    <div class="character-cards" v-if = "character.name">
+      <div
         class = "character-card"
         v-bind:class = "[character.loyalty,character.status]"
         >
@@ -33,29 +31,31 @@
           <li>Lvl 1 {{character.class}}</li>
           <li>{{character.hp}}/{{character.max_hp}} hp</li>
         </ul>
-        <div 
-          class='action-suite' 
-          v-if="character.active"
-          >
-          <div v-if="character.hp > 0">
-            <button v-on:click = "attack(character.id, character.attacking_id)">
-              attack
-            </button>
-            <select v-model="character.attacking_id">
-              <option></option>
-              <option 
-                v-for="x in attackable(character)"
-                v-bind:value="x.id">
-                {{x.name}}
-              </option>
-            </select>
-          </div>
-          <div v-else>
-            <button v-on:click = "revive(character.id)">
-              revive
-            </button>
-          </div>
+      </div>
+      <div 
+        class='action-suite' 
+        v-if="character.active"
+        >
+        <div v-if="character.hp > 0">
+          <button v-on:click = "attack(character.id, character.attacking_id)">
+            attack
+          </button>
+          <select v-model="character.attacking_id">
+            <option></option>
+            <option 
+              v-for="x in attackable(character)"
+              v-bind:value="x.id">
+              {{x.name}}
+            </option>
+          </select>
         </div>
+        <div v-else>
+          <button v-on:click = "revive(character.id)">
+            revive
+          </button>
+        </div>
+        <div><button>item</button></div>
+        <div><button>end</button></div>
       </div>
     </div>
 
