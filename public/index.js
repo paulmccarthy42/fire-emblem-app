@@ -68,7 +68,7 @@ var HomePage = {
       this.endTurn();
     },
     save: function() {
-      axios.patch("/v1/characters", { characters: this.characters });
+      axios.patch("/v1/characters", { characters: this.charactersMapped() });
     },
     endTurn: function() {
       this.characters.forEach(function(char) {
@@ -113,6 +113,7 @@ var HomePage = {
       this.character = {};
     },
     clickOnTile: function(row, column) {
+      console.log(this.backendTile(row, column));
       if (this.frontendTile(row, column).hasClass("in-range")) {
         this.move(row, column);
       } else {
@@ -128,9 +129,9 @@ var HomePage = {
       }
     },
     move: function(row, column) {
-      this.deactivate();
       this.backendTile(row, column).character = this.character;
-      this.backendTile(this.focused.x, this.focused.y).character = {};
+      this.backendTile(this.focused.x, this.focused.y).character = null;
+      this.deactivate();
       this.clearFocus();
     },
     focus: function(row, column, range) {
