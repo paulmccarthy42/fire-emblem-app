@@ -18,6 +18,7 @@ var HomePage = {
     );
   },
   methods: {
+    // toolbox
     charactersMapped: function() {
       var char = [];
       this.map.forEach(function(row) {
@@ -28,60 +29,6 @@ var HomePage = {
         });
       });
       return char;
-    },
-    attack: function(attackingId, attackedId) {
-      // update hp for this.map character
-      this.map.forEach(function(row) {
-        row.forEach(function(tile) {
-          if (tile.character && tile.character.id === attackedId) {
-            tile.character.hp = Math.max(
-              0,
-              tile.character.hp - Math.floor(Math.random() * 10 + 1)
-            );
-            if (tile.character.hp === 0) {
-              tile.character.status = "dead";
-            }
-          }
-        });
-      });
-      // cleanup for attacker
-      this.deactivate(attackingId);
-    },
-    attackable: function(character) {
-      return this.charactersMapped().filter(function(char) {
-        return (
-          char !== character &&
-          char.loyalty !== character.loyalty &&
-          char.status !== "dead"
-        );
-      });
-    },
-    revive: function(id) {
-      var index = this.characters.findIndex(function(char) {
-        return char.id === id;
-      });
-      var character = this.characters[index];
-      character.status = "normal";
-      character.hp = character.max_hp;
-    },
-    deactivate: function(id) {
-      this.character.active = false;
-    },
-    refresh: function() {
-      this.characters.forEach(
-        function(char) {
-          this.revive(char.id);
-        }.bind(this)
-      );
-      this.endTurn();
-    },
-    save: function() {
-      axios.patch("/v1/characters", { characters: this.characters });
-    },
-    endTurn: function() {
-      this.characters.forEach(function(char) {
-        char.active = true;
-      });
     },
     frontendTile: function(row, column) {
       return $("#" + row + "-" + column);
@@ -99,6 +46,62 @@ var HomePage = {
         });
       });
       return tile;
+    },
+    // menu items
+    revive: function(id) {
+      var index = this.characters.findIndex(function(char) {
+        return char.id === id;
+      });
+      var character = this.characters[index];
+      character.status = "normal";
+      character.hp = character.max_hp;
+    },
+    refresh: function() {
+      this.characters.forEach(
+        function(char) {
+          this.revive(char.id);
+        }.bind(this)
+      );
+      this.endTurn();
+    },
+    save: function() {
+      axios.patch("/v1/characters", { characters: this.characters });
+    },
+    endTurn: function() {
+      this.characters.forEach(function(char) {
+        char.active = true;
+      });
+    },
+    // Attack methods
+    attack: function(attackingId, attackedId) {
+      // update hp for this.map character
+      this.map.forEach(function(row) {
+        row.forEach(function(tile) {
+          if (tile.character && tile.character.id === attackedId) {
+            tile.character.hp = Math.max(
+              0,
+              tile.character.hp - Math.floor(Math.random() * 10 + 1)
+            );
+            if (tile.character.hp === 0) {
+              tile.character.status = "dead";
+            }
+          }
+        });
+      });
+      // cleanup for attacker
+      this.deactivate();
+    },
+    attackable: function(character) {
+      return this.charactersMapped().filter(function(char) {
+        return (
+          char !== character &&
+          char.loyalty !== character.loyalty &&
+          char.status !== "dead"
+        );
+      });
+    },
+    deactivate: function() {
+      this.character.active = false;
     },
     clearFocus: function() {
       $(".map-square").each(function() {
