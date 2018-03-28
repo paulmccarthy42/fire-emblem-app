@@ -52,6 +52,7 @@ var HomePage = {
     },
     // menu items
     revive: function(id) {
+      // fix this function
       var index = this.characters.findIndex(function(char) {
         return char.id === id;
       });
@@ -60,6 +61,7 @@ var HomePage = {
       character.hp = character.max_hp;
     },
     refresh: function() {
+      // fix this function
       this.characters.forEach(
         function(char) {
           this.revive(char.id);
@@ -100,6 +102,7 @@ var HomePage = {
           char !== character &&
           char.loyalty !== character.loyalty &&
           char.status !== "dead"
+          // add logic for checking nearness to focused
         );
       });
     },
@@ -133,8 +136,9 @@ var HomePage = {
     move: function(row, column) {
       this.backendTile(row, column).character = this.character;
       this.backendTile(this.focused.x, this.focused.y).character = null;
-      this.deactivate();
-      this.clearFocus();
+      // change focused on character move
+      this.deactivate(); // move this to end button in action suite/call on other action
+      this.clearFocus(); // move this to end button in action suite/call on other action
     },
     focus: function(row, column, range) {
       for (var x = -range; x <= range; x++) {
