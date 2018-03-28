@@ -121,7 +121,7 @@ var HomePage = {
         var character = this.backendTile(row, column).character;
         // the issue with attacking is that front end relies on this, which doesn't update until the backend does
         // this should replace this.characters
-        if (character !== null) {
+        if (character && character.active) {
           this.character = character;
           this.focused.x = row;
           this.focused.y = column;
@@ -130,6 +130,7 @@ var HomePage = {
       }
     },
     move: function(row, column) {
+      this.deactivate();
       this.backendTile(row, column).character = this.character;
       this.backendTile(this.focused.x, this.focused.y).character = {};
       this.clearFocus();
