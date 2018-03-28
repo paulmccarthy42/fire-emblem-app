@@ -30,6 +30,9 @@ var HomePage = {
       });
       return char;
     },
+    deactivate: function() {
+      this.character.active = false;
+    },
     frontendTile: function(row, column) {
       return $("#" + row + "-" + column);
     },
@@ -100,9 +103,6 @@ var HomePage = {
         );
       });
     },
-    deactivate: function() {
-      this.character.active = false;
-    },
     clearFocus: function() {
       $(".map-square").each(function() {
         $(this).removeClass("in-range");
@@ -119,8 +119,6 @@ var HomePage = {
         this.clearFocus();
         this.frontendTile(row, column).addClass("focused");
         var character = this.backendTile(row, column).character;
-        // the issue with attacking is that front end relies on this, which doesn't update until the backend does
-        // this should replace this.characters
         if (character && character.active) {
           this.character = character;
           this.focused.x = row;
@@ -139,13 +137,13 @@ var HomePage = {
       for (var x = -range; x <= range; x++) {
         for (var y = -range + Math.abs(x); y <= range - Math.abs(x); y++) {
           if (Math.abs(x) + Math.abs(y) === range) {
-            $(
-              "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
-            ).addClass("attackable");
+            this.frontendTile(parseInt(row) + x, parseInt(column) + y).addClass(
+              "attackable"
+            );
           } else if (x !== 0 || y !== 0) {
-            $(
-              "#" + (parseInt(row) + x) + "-" + (parseInt(column) + y)
-            ).addClass("in-range");
+            this.frontendTile(parseInt(row) + x, parseInt(column) + y).addClass(
+              "in-range"
+            );
           }
         }
       }
